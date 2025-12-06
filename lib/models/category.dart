@@ -8,6 +8,6 @@ class Category {
   const Category({
     required this.id,
     required this.title,
-    this.color = Colors.amberAccent,
+    this.color = const Color.fromRGBO(105, 223, 231, 1),
   });
 }
