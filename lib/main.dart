@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './category_screen.dart';
+import 'package:meals_app/screens/meal_details_screen.dart';
+import 'screens/category_meals_screen.dart';
+import 'screens/category_screen.dart';
 
 void main() => runApp(_MyMealsApp());
 
@@ -20,7 +22,11 @@ class _MyMealsAppState extends State<_MyMealsApp> {
         textTheme: TextTheme(
           bodyMedium: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
           bodySmall: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
-          titleLarge: TextStyle(fontSize: 24, fontFamily: 'Roboto-Bold'),
+          titleLarge: TextStyle(
+            fontSize: 24,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w300,
+          ),
           titleMedium: TextStyle(
             fontSize: 18,
             fontFamily: 'Roboto',
@@ -29,7 +35,12 @@ class _MyMealsAppState extends State<_MyMealsApp> {
           // titleSmall:
         ),
       ),
-      home: const CategoryScreen(),
+      // home: const CategoryScreen(),
+      routes: {
+        "/": (ctx) => CategoryScreen(),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
+      },
     );
   }
 }
