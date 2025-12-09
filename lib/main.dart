@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/screens/meal_details_screen.dart';
+
+import './screens/meal_details_screen.dart';
+import './screens/tab_screen.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/category_screen.dart';
 
@@ -37,7 +39,7 @@ class _MyMealsAppState extends State<_MyMealsApp> {
       ),
       // home: const CategoryScreen(),
       routes: {
-        "/": (ctx) => CategoryScreen(),
+        "/": (ctx) => TabScreen(),
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
       },
