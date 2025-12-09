@@ -41,6 +41,24 @@ class _MyMealsAppState extends State<_MyMealsApp> {
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
       },
+      onGenerateRoute: (settings) {
+        //called if a route is not registered in routes
+        return MaterialPageRoute(
+          builder: (ctx) {
+            return CategoryScreen();
+          },
+        );
+      },
+      onUnknownRoute: (settings) {
+        // called in secenario if the routes and on Generate is not registered or flutter is not able
+        // to create the page we want
+
+        return MaterialPageRoute(
+          builder: (ctx) {
+            return CategoryScreen();
+          },
+        );
+      },
     );
   }
 }
