@@ -30,7 +30,7 @@ class _MyMealsAppState extends State<_MyMealsApp> {
           titleMedium: TextStyle(
             fontSize: 18,
             fontFamily: 'Roboto',
-            fontWeight: FontWeight.normal,
+            fontWeight: FontWeight.bold,
           ),
           // titleSmall:
         ),
