@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/widgets/main_drawer.dart';
 import '../screens/category_screen.dart';
 import '../screens/favourite_screen.dart';
 
@@ -55,7 +56,8 @@ class _TabScreenState extends State<TabScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(_pages[selectedTabInd]["title"] as String), leading: Icon(Icons.menu)),
+      appBar: AppBar(title: Text(_pages[selectedTabInd]["title"] as String)),
+      drawer: MainDrawer(),
       body: _pages[selectedTabInd]["page"] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
