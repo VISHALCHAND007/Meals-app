@@ -5,12 +5,16 @@ import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
-  const MealItem({required this.meal, super.key});
+  Function(String) removeItem;
+
+  MealItem({required this.meal, required this.removeItem, super.key});
 
   void _onMealSelected(BuildContext context) {
     Navigator.of(
       context,
-    ).pushNamed(MealDetailsScreen.routeName, arguments: meal.id);
+    ).pushNamed(MealDetailsScreen.routeName, arguments: meal.id).then((result) {
+      if (result != null) removeItem(result as String);
+    });
   }
 
   String get getMealComplexity {

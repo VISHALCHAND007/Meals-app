@@ -3,6 +3,7 @@ import 'package:meals_app/dummy_data.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   static const routeName = "/meal-details";
+
   const MealDetailsScreen({super.key});
 
   Widget createTitleWidget(String title, BuildContext context) {
@@ -82,6 +83,12 @@ class MealDetailsScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pop(mealId);
+        },
+        child: Icon(Icons.delete),
       ),
     );
   }
