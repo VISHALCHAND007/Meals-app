@@ -17,9 +17,15 @@ class _MyMealsApp extends StatefulWidget {
 }
 
 class _MyMealsAppState extends State<_MyMealsApp> {
-  Filter filters = Filter(isGlutenFree: false, isLactoseFree: false, isVegetarian: false, isVegan: false);
+  Filter filters = Filter(
+    isGlutenFree: false,
+    isLactoseFree: false,
+    isVegetarian: false,
+    isVegan: false,
+  );
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favouriteMeals = [];
 
   void setFilters(Filter newFilters) {
     setState(() {
@@ -27,21 +33,43 @@ class _MyMealsAppState extends State<_MyMealsApp> {
       filters = newFilters;
 
       _availableMeals = DUMMY_MEALS.where((meal) {
-        if(filters.isGlutenFree && !meal.isGlutenFree) {
+        if (filters.isGlutenFree && !meal.isGlutenFree) {
           return false;
         }
-        if(filters.isLactoseFree && !meal.isLactoseFree) {
+        if (filters.isLactoseFree && !meal.isLactoseFree) {
           return false;
         }
-        if(filters.isVegan && !meal.isVegan) {
+        if (filters.isVegan && !meal.isVegan) {
           return false;
         }
-        if(filters.isVegetarian && !meal.isVegetarian) {
+        if (filters.isVegetarian && !meal.isVegetarian) {
           return false;
         }
         return true;
       }).toList();
     });
+  }
+
+  bool _isFavourite(String mealId) {
+    return _favouriteMeals.any((meal) => meal.id == mealId);
+  }
+
+  void _toggleFavourite(String mealId) {
+    final itemId = _favouriteMeals.indexWhere((meal) => meal.id == mealId);
+
+    if (itemId == -1) {
+      // no favourite found
+      //adding
+      setState(() {
+        _favouriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      });
+    } else {
+      //favourite found
+      //removing
+      setState(() {
+        _favouriteMeals.removeAt(itemId);
+      });
+    }
   }
 
   @override
@@ -70,10 +98,15 @@ class _MyMealsAppState extends State<_MyMealsApp> {
       ),
       // home: const CategoryScreen(),
       routes: {
-        "/": (ctx) => TabScreen(),
-        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(availableMeals: _availableMeals,),
-        MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(),
-        FilterScreen.routeName: (ctx) => FilterScreen(setFilters: setFilters,filters: filters,),
+        "/": (ctx) => TabScreen(favouriteMeals: _favouriteMeals),
+        CategoryMealsScreen.routeName: (ctx) =>
+            CategoryMealsScreen(availableMeals: _availableMeals),
+        MealDetailsScreen.routeName: (ctx) => MealDetailsScreen(
+          isFavourite: _isFavourite,
+          toggleFavourite: _toggleFavourite,
+        ),
+        FilterScreen.routeName: (ctx) =>
+            FilterScreen(setFilters: setFilters, filters: filters),
       },
       onGenerateRoute: (settings) {
         //called if a route is not registered in routes

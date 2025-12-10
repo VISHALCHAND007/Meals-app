@@ -5,15 +5,16 @@ import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
-  Function(String) removeItem;
+  // Function(String) removeItem;
 
-  MealItem({required this.meal, required this.removeItem, super.key});
+  // MealItem({required this.meal, required this.removeItem, super.key});
+  const MealItem({super.key, required this.meal});
 
   void _onMealSelected(BuildContext context) {
     Navigator.of(
       context,
     ).pushNamed(MealDetailsScreen.routeName, arguments: meal.id).then((result) {
-      if (result != null) removeItem(result as String);
+      // if (result != null) removeItem(result as String);
     });
   }
 

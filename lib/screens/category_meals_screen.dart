@@ -28,29 +28,29 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   void didChangeDependencies() {
-   if(!isInitDone) {
-     isInitDone = true;
-     final routeArgs = ModalRoute.of(context)?.settings.arguments as Category;
-     title = routeArgs.title;
-     categoryMeals = widget.availableMeals.where((meal) {
-       return meal.categories.contains(routeArgs.id);
-     }).toList();
-
-   }
+    if (!isInitDone) {
+      isInitDone = true;
+      final routeArgs = ModalRoute.of(context)?.settings.arguments as Category;
+      title = routeArgs.title;
+      categoryMeals = widget.availableMeals.where((meal) {
+        return meal.categories.contains(routeArgs.id);
+      }).toList();
+    }
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: ListView.builder(
-        itemBuilder: (context, ind) {
-          return MealItem(meal: categoryMeals[ind], removeItem: removeItem,);
-        },
-        itemCount: categoryMeals.length,
-      ),
+      body: categoryMeals.isEmpty
+          ? Center(child: Image.asset("assets/images/not_found.png", height: 150, fit: BoxFit.cover,))
+          : ListView.builder(
+              itemBuilder: (context, ind) {
+                return MealItem(meal: categoryMeals[ind]);
+              },
+              itemCount: categoryMeals.length,
+            ),
     );
   }
 }

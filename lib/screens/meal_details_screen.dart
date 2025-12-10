@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/dummy_data.dart';
 
-class MealDetailsScreen extends StatelessWidget {
+class MealDetailsScreen extends StatefulWidget {
   static const routeName = "/meal-details";
+  final Function(String) isFavourite;
+  final Function(String) toggleFavourite;
 
-  const MealDetailsScreen({super.key});
+  const MealDetailsScreen({super.key, required this.isFavourite, required this.toggleFavourite});
 
+  @override
+  State<MealDetailsScreen> createState() => _MealDetailsScreenState();
+}
+
+class _MealDetailsScreenState extends State<MealDetailsScreen> {
   Widget createTitleWidget(String title, BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -85,10 +92,11 @@ class MealDetailsScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pop(mealId);
-        },
-        child: Icon(Icons.delete),
+        // onPressed: () {
+        //   Navigator.of(context).pop(mealId);
+        // },
+        onPressed: () =>widget.toggleFavourite(mealId),
+        child: widget.isFavourite(mealId) ? Icon(Icons.favorite) : Icon(Icons.favorite_outline),
       ),
     );
   }
