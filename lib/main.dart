@@ -52,7 +52,7 @@ class _MyMealsAppState extends State<_MyMealsApp> {
         );
       },
       onUnknownRoute: (settings) {
-        // called in secenario if the routes and on Generate is not registered or flutter is not able
+        // called in scenario if the routes and on Generate is not registered or flutter is not able
         // to create the page we want
 
         return MaterialPageRoute(
